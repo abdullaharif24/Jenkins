@@ -10,9 +10,9 @@ pipeline {
         
         stage('Dependency Installation') {
             steps {
-                // You can add commands to install backend dependencies here
+                // Add commands to install backend dependencies here
                 // For example:
-                // sh 'npm install' or 'yarn install'
+                sh 'npm install'
             }
         }
         
@@ -20,7 +20,7 @@ pipeline {
             steps {
                 // Add commands to run tests for the backend
                 // For example:
-                // sh 'npm test' or 'yarn test'
+                sh 'npm test'
             }
         }
     }
