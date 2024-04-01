@@ -17,9 +17,8 @@ pipeline {
         
         stage('Test') {
             steps {
-                // Run tests for backend (if any)
-                // Example command:
-                // bat 'npm test'
+                // Placeholder step for running tests
+                echo 'Running tests...'
             }
         }
         
