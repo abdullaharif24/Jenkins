@@ -1,42 +1,46 @@
 pipeline {
     agent any
-
+    
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/NaseemKhan005/react-bank-app'
+                checkout scm
             }
         }
         
         stage('Dependency Installation') {
             steps {
                 // Install dependencies for frontend
-                sh 'cd frontend && npm install'
+                bat 'npm install'
                 // Install dependencies for backend (if any)
-                // sh 'cd backend && npm install'
+                // sh 'command_to_install_backend_dependencies'
             }
         }
-
+        
         stage('Build') {
             steps {
                 // Build React application
-                sh 'cd frontend && npm run build'
+                bat 'npm start'
             }
         }
-
+        
         stage('Test') {
             steps {
                 // Run tests for React application
-                sh 'cd frontend && npm test'
+                bat 'npm test'
             }
         }
-
+        
         stage('Containerized') {
             steps {
-                // Build Docker images
-                sh 'docker-compose build'
-                // Run Docker containers
-                sh 'docker-compose up -d'
+                // Build and deploy containers using Docker Compose
+                bat 'docker-compose up -d --build'
+            }
+            post {
+                always {
+                    // Cleanup - stop and remove containers
+                    bat 'docker-compose down'
+                }
             }
         }
     }
